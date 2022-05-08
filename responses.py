@@ -1,7 +1,6 @@
 from datetime import datetime
 from telegram.ext import *
 import telegram
-import requests
 
 bot = telegram.Bot(token='5287913028:AAGI38rcE0pxJFgwl1jUt3M3nqrhwuE7N8Y')
 
@@ -19,8 +18,6 @@ def sample_responses(input_text):
 
     if user_message in ("yessir"):
         return "yessir"
-    
-    if user_message in ("tt"):
-        files = {'photo':open('D:\Visual Studio Code Projects\Telegram Bot\Bot\image1.png','rb')}
-        resp = requests.post('https://api.telegram.org/bot5287913028:AAGI38rcE0pxJFgwl1jUt3M3nqrhwuE7N8Y/sendPhoto?chat_id=-1001255506203&caption={}',files=files)
-        print(resp.status_code)
+
+    if user_message in ("rupya"):
+        return "Baba Rupya ki Jai 🙏"
