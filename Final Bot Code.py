@@ -1,6 +1,5 @@
 from setuptools import Command
 import telegram
-import Constants as keys
 from telegram.ext import *
 import responses as R
 from datetime import datetime
@@ -20,15 +19,18 @@ def help_command(update, context):
 def time(update, context):
     update.message.reply_text(str((datetime.now()).strftime("%d/%m/%y %H:%M:%S")))
 
+def vision(update,context):
+    update.message.reply_text("Vision:\n\nPune Institute of Computer Technology aspires to be the leader in Higher technical education and research of International repute.")
+
+def mission(update,context):
+    update.message.reply_text("Mission:\n\nTo be the leading and the most sought after institute of education and research in emerging engineering and technology disciplines that attract, retains and sustains gifted individuals of significant potential.")
+
 def timetable(update, context):
     update.message.reply_text('''Hey there PICTian 🌊,
     To get the timetable for the required division, type a command in the following manner.
     Syntax:
-
                         tt <space> x
-
         where x: Number of the division whose timetable you want to fetch.
-
     Enjoy!
     ''')
 
@@ -40,6 +42,8 @@ def handle_message(update, context):
         sl = list(text.split(" "))
         bot.send_photo(update.message.chat.id, 'https://pict-tt-bot.vercel.app/FE%20({}).jpg'.format(str(sl[1])))
     
+    elif text in ("haraami","harami"):
+        bot.send_photo(update.message.chat_id, 'https://i.ibb.co/zf5zPFL/cheems-haraami.png')
     else:
         response = R.sample_responses(text)
         update.message.reply_text(response)
@@ -48,7 +52,7 @@ def error(update, context):
     print(f"Update {update} caused error {context.error}")
 
 def main():
-    updater = Updater(keys.API_KEY, use_context=True)
+    updater = Updater('5287913028:AAGI38rcE0pxJFgwl1jUt3M3nqrhwuE7N8Y', use_context=True)
     dp = updater.dispatcher
     
     # Command Handlers
@@ -57,7 +61,8 @@ def main():
     dp.add_handler(CommandHandler("help", help_command))
     dp.add_handler(CommandHandler("time", time))
     dp.add_handler(CommandHandler("timetable",timetable))
-
+    dp.add_handler(CommandHandler("vision",vision))
+    dp.add_handler(CommandHandler("mission",mission))
     # Message Handlers
 
     dp.add_handler(MessageHandler(Filters.text, handle_message))
