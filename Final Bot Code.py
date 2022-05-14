@@ -4,7 +4,7 @@ from telegram.ext import *
 import responses as R
 from datetime import datetime
 
-bot = telegram.Bot(token='5287913028:AAGI38rcE0pxJFgwl1jUt3M3nqrhwuE7N8Y')
+bot = telegram.Bot(token='<YOUR BOT TOKEN GOES HERE>')
 
 print("\n\n------------------------------------------------------------------------------------------------------------------\n\nBot started!!")
 
