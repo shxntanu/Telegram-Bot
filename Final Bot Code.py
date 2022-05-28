@@ -1,15 +1,15 @@
-
-import telegram #from the module python-telegram-bot
-from telegram.ext import * #telegram.ext library from the module
-import responses as R #responses file for normal text responses
+import telegram
+from telegram.ext import *
+import responses as R
 from datetime import datetime
 from keep_alive import alive
 
-#Making a bot object using the bot function and your bot's token
-bot = telegram.Bot(token=''<your bot token goes here>')
+# Making a bot object using the bot function and your bot's token
+
+bot = telegram.Bot(token="<your bot token goes here>")
 
 # Dictionary containing all Course outcomes of SPPU FE Subjects
-                   
+
 co_dict = {"phy":'''Course Outcomes:
 
 On completion of the course, learner will be able to–
@@ -136,6 +136,7 @@ CO4: Learn skills required to research and analyze environmental issues scientif
 how to use those skills in applied situations such as careers that may involve environmental
 problems and/or issues.'''}
 
+
 print(
     "\n\n------------------------------------------------------------------------------------------------------------------\n\nBot started!!"
 )
@@ -148,10 +149,24 @@ def start_command(update, context):
     update.message.reply_text('Type something random to get started')
 
 # Help command which describes the bot and its commands
-                   
+
 def help_command(update, context):
     update.message.reply_text(
-        '''Hola!\nThis bot is still in developmental stage, but it does have a few commands that you can use :) \n\n/start - A test command to see if the bot is online \n/help - A command to see all the commands available for the bot\n/time - Tells you the current time \n/timetable - To fetch the timetable of any division \n/vision - Vision of PICT \n/mission - Mission of PICT \n\n Then there come some commands which don't need a Slash to operate:\nhi - The bot greets you with a message \nabout - A little description about the bot :)'''
+        '''Hola!
+This bot is still in developmental stage, but it does have a few commands that you can use :) 
+
+/start - A test command to see if the bot is online 
+/help - A command to see all the commands available for the bot
+/time - Tells you the current time 
+/timetable - To fetch the timetable of any division 
+/vision - Vision of PICT 
+/mission - Mission of PICT 
+/courseoutcome - Shows the course outcomes of each subject of Second Semester in FE
+/books - link for the required FE books
+
+ Then there come some commands which don't need a Slash to operate:
+hi - The bot greets you with a message 
+about - A little description about the bot :)'''
     )
 
 # Time command which tells the current time (Note: if the bot is running on a server, then it'll tell the time of the server)
@@ -159,6 +174,13 @@ def help_command(update, context):
 def time(update, context):
     update.message.reply_text(
         str((datetime.now()).strftime("%d/%m/%y %H:%M:%S")))
+
+# Command to get the link of the telegram channel with SPPU books
+
+def books(update,context):
+    update.message.reply_text('''The following telegram channel has the books you need:
+    
+                        https://t.me/pictfebookssem2''')
 
 # Command to show the vision of PICT
 
@@ -175,7 +197,7 @@ def mission(update, context):
     )
 
 # Command which sends you the message syntax to obtain the course outcomes of the desired subjects in the SPPU Syllabus
-                   
+
 def course_outcomes(update,context):
     update.message.reply_text('''Hey there!
 You really need to memorise the CO's of subjects, don't you? 😂
@@ -190,7 +212,7 @@ where subject names: EM2, PHY, CHEM, EG, BEE, BXE, EM, PPS, ES2
 Enjoy!''')
 
 # Command which sends you the message syntax to obtain the timetable of any FE division in PICT
-                   
+
 def timetable(update, context):
     update.message.reply_text(
         '''Hey there PICTian 🌊,\nTo get the timetable for the required division, type a command in the following manner.\n\nSyntax:\n
@@ -199,10 +221,10 @@ def timetable(update, context):
     ''')
 
 # Function to handle messages
-                   
+
 def handle_message(update, context):
     text = str(update.message.text).lower()
-
+    
     if text in ("tt 1", "tt 2", "tt 3", "tt 4", "tt 5", "tt 6", "tt 7", "tt 8",
                 "tt 9", "tt 10", "tt 11"):
         sl = list(text.split(" "))
@@ -212,26 +234,48 @@ def handle_message(update, context):
 
     elif text in ("co eg", "co bxe","co em","co pps","co chem","co phy","co em2","co es2"):
         sl = list(text.split())
-        bot.send_message(update.message.chat.id,co_dict[str(sl[1])])
+        bot.send_message(update.message.chat.id, co_dict[str(sl[1])])
   
-    elif text in ("haraami", "harami"):
-        bot.send_photo(update.message.chat_id,
-                       'https://i.ibb.co/zf5zPFL/cheems-haraami.png')
+    elif text in ("waah"):
+        bot.send_photo(update.message.chat_id, 'https://i.ibb.co/zfz9kKb/waah-emote.png')
+        bot.delete_message(update.message.chat_id, update.message.message_id)
+    
+    elif text in ("pepelaugh"):
+        bot.send_sticker(update.message.chat_id, 'CAACAgIAAxkBAAEURmtii0iY-KuGVeKyUJoTxp2YMb5BHwACrCsAAktqAwABR84tu7AWggMkBA')
+        bot.delete_message(update.message.chat_id, update.message.message_id)
+
+    elif text in ("pepehands"):
+      bot.send_sticker(update.message.chat_id, 'CAACAgIAAxkBAAEUZR1ij7RPt7mIFToH39QDIVzzFDSi4gAC-SYAAktqAwABJKWBkTWlpzokBA')
+
+    elif text in ("ez"):
+      bot.send_sticker(update.message.chat_id,'CAACAgIAAxkBAAEUZSVij7cZuSIxNJENYO0M5IZOmf090wACOyYAAktqAwABU3EJXSaKHCQkBA')
+
+    elif text in ("monkas"):
+      bot.send_sticker(update.message.chat_id,'CAACAgIAAxkBAAEUZS1ij7e2_nSsC8CFUp-5UrnW-fnD4wACMyYAAktqAwABf5ROt-qqdcYkBA')
+
+    elif text in ("feelsbadman"):
+      bot.send_sticker(update.message.chat_id,'CAACAgIAAxkBAAEUZTFij7f2D7p3Qdw74eYLY3nFarsqdQACMSYAAktqAwAB5LUCSor2LWUkBA')
+      bot.delete_message(update.message.chat_id,update.message.message_id)
+      
+  
+    elif text in ("haraami","harami"):
+        bot.send_sticker(update.message.chat_id, 'CAACAgUAAxkBAAEURqhii1LslqS5XtbcNy4qUFuS7ALlFgACRgIAAsAs6FcKRb3LSnXQnyQE')
+        bot.delete_message(update.message.chat_id, update.message.message_id)
+    
     else:
         response = R.sample_responses(text)
         update.message.reply_text(response)
 
 # Function to see errors
-                   
+
 def error(update, context):
     print(f"Update {update} caused error {context.error}")
 
-# Main Function
-                   
+# Main function
+
 def main():
     alive()
-    updater = Updater('<your bot token goes here>',
-                      use_context=True)
+    updater = Updater("your bot token goes here",use_context=True)
     dp = updater.dispatcher
 
     # Command Handlers
@@ -243,14 +287,15 @@ def main():
     dp.add_handler(CommandHandler("vision", vision))
     dp.add_handler(CommandHandler("mission", mission))
     dp.add_handler(CommandHandler("courseoutcome",course_outcomes))
-  
-    # Message Handlers
+    dp.add_handler(CommandHandler("books",books))
+    
+    # Message Handler
 
     dp.add_handler(MessageHandler(Filters.text, handle_message))
 
     dp.add_error_handler(error)
 
-    updater.start_polling() # Starts 
+    updater.start_polling()
     updater.idle()
 
 
